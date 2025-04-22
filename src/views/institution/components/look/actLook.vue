@@ -14,7 +14,7 @@
 				<el-menu-item index="0" data-name="info">活动信息</el-menu-item>
 				<el-menu-item index="1" data-name="content">活动内容</el-menu-item>
 				<el-menu-item index="2" data-name="requirements">活动需求</el-menu-item>
-				<!-- <el-menu-item index="3" data-name="cause">驳回原因</el-menu-item> -->
+				<el-menu-item  v-if="activity.state === '2'"  index="3" data-name="cause">驳回原因</el-menu-item>
 			</el-menu>
 		</div>
 
@@ -39,11 +39,11 @@
 				<p>活动物资: {{ activity.goods }}</p>
 			</div>
 		</el-card>
-		<!-- <el-card class="activity-section" header="驳回原因" id="causeCard">
+		<el-card v-if="activity.state === '2'" class="activity-section" header="驳回原因" id="causeCard">
 			<div class="activity-cause">
-				<p>{{ activity.content }}</p>
+				<p>{{ activity.reject ||"--" }}</p>
 			</div>
-		</el-card> -->
+		</el-card>
 
 		<div class="buttons">
 			<el-button type="primary" @click="approve">

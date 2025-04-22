@@ -123,7 +123,7 @@
 					@size-change="handleSizeChange"
 					@current-change="handleCurrentChange"
 					:current-page="currentPage"
-					:page-sizes="[5, 10, 15, 20]"
+					:page-sizes="[ 15, 20]"
 					:page-size="pageSize"
 					layout="total, sizes, prev, pager, next, jumper"
 					:total="allActivities.length" />
@@ -167,6 +167,7 @@ const params = ref({
 	pageSize: pageSize.value
 })
 
+
 const init = async () => {
 	params.value.page = currentPage.value // 更新请求中的当前页码
 	params.value.pageSize = pageSize.value // 更新请求中的每页大小
@@ -175,25 +176,44 @@ const init = async () => {
 	// @ts-ignore
 	console.log('机构活动审核接受的数据： ', res.data)
 	// @ts-ignore
+
 	const currentItem = res.data.rows.map((job) => ({
 		index: job.id,
 		name: job.name,
 		time: job.time,
 		place: job.place,
-		id: job.id
+		id: job.id,
+		state:job.state
 	}))
 	allActivities.value = currentItem
 }
 
 function viewProof(row) {
 	console.log('router传参值： ', router.getRoutes())
-	console.log('row的值：', row)
-	router.push({
+	console.log("row",row.state)
+	if(row.state==="1"){
+		router.push({
 		path: '/ActivityManage/Await/AwaitLook',
 		query: {
 			id: row.id
 		}
 	})
+	}else if(row.state==="2"){
+		router.push({
+		path: '/ActivityManage/Rejected/RejectLook',
+		query: {
+			id: row.id
+		}
+	})
+	}else{
+		router.push({
+		path: '/ActivityManage/Pass/PassLook',
+		query: {
+			id: row.id
+		}
+	})
+	}
+	
 }
 // 全部活动数据
 const allActivities = ref([])

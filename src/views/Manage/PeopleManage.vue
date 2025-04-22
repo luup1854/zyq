@@ -168,19 +168,19 @@ const options = [
 		label: '公司',
 		children: [
 			{
-				value: '1',
+				value: '大众公司',
 				label: '大众公司'
 			},
 			{
-				value: '2',
+				value: '政府机构',
 				label: '政府机构'
 			},
 			{
-				value: '3',
+				value: '兼职机构',
 				label: '兼职机构'
 			},
 			{
-				value: '4',
+				value: '其他机构',
 				label: '其他机构'
 			}
 		]
