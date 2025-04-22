@@ -104,7 +104,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { getStudent } from '../../api/zyb/administration'
+//import { getStudent } from '../../api/zyb/administration'
 import { getInstitution } from '../../api/zyb/administration'
 import { deleteStu } from '@/api/zyb/administration'
 import { deleteInst } from '@/api/zyb/administration'
@@ -121,15 +121,15 @@ const params = ref({
 })
 
 // inti中的代码放入选择中，不过可以封装一下
-const studentInit = async () => {
-	individualData.value = []
-	const res = await getStudent(params.value)
-	// @ts-ignore
-	console.log('人员管理个人接受的数据： ', res.data)
-	// @ts-ignore
-	individualData.value = res.data
-	console.log('individualData: ', individualData.value)
-}
+// const studentInit = async () => {
+// 	individualData.value = []
+// 	const res = await getStudent(params.value)
+// 	// @ts-ignore
+// 	console.log('人员管理个人接受的数据： ', res.data)
+// 	// @ts-ignore
+// 	individualData.value = res.data
+// 	console.log('individualData: ', individualData.value)
+// }
 
 const newParams = ref({
 	type: ''
@@ -199,7 +199,7 @@ async function handleCascaderChange(value) {
 		selectedValue.value = value[0] // 获取顶级类别，这里是 'firm' 或 'individual'
 		if (selectedValue.value === 'individual') {
 			params.value.newType = value[1]
-			await studentInit()
+			//await studentInit()
 		} else if (selectedValue.value === 'firm') {
 			//调用公司
 			newParams.value.type = value[1]

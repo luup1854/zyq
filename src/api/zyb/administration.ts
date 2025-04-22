@@ -15,9 +15,13 @@ export function getInstitution(params?: object) {
  * @param params 
  * @returns 
  */
-export function getStudent(params?: object) {
-  return get<any, Result<any>>(baseUrlApi('administration/student'), params)
+export function getVolunteer() {
+  return get<any, Result<any>>(baseUrlApi('administration/audit/volunteer'))
 }
+export function getProfess() {
+  return get<any, Result<any>>(baseUrlApi('administration/audit/profess'))
+}
+
 
 /**
  * 根据id选择管理员信息

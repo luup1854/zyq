@@ -59,7 +59,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { getStudent, identityInsService } from '../../api/zyb/administration'
+import {
+	getProfess,
+	getVolunteer,
+	identityInsService,
+	identityProService,
+	identityVolService
+} from '../../api/zyb/administration'
 import { getInstitution } from '../../api/zyb/administration'
 import { ElMessage } from 'element-plus'
 
@@ -72,11 +78,27 @@ const params = ref({
 
 const studentInit = async () => {
 	individualData.value = []
-	const res = await getStudent(params.value)
+	if (params.value.newType === '1') {
+		try {
+			const res: any = await getVolunteer()
+			individualData.value = res.data
+			// console.groupCollapsed
+		} catch (error) {
+			console.log(error)
+		}
+	} else {
+		try {
+			const res: any = await getProfess()
+			individualData.value = res.data
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	// @ts-ignore
-	console.log('身份审核个人接受的数据： ', res.data)
+	//console.log('身份审核个人接受的数据： ', res.data)
 	// @ts-ignore
-	individualData.value = res.data
+
 	console.log('individualData: ', individualData.value)
 }
 
@@ -128,10 +150,6 @@ const options = [
 			},
 			{
 				value: '2',
-				label: '普通学生'
-			},
-			{
-				value: '3',
 				label: '专业人才'
 			}
 		]
@@ -186,31 +204,78 @@ async function handleCascaderChange(value) {
 }
 
 //审核
-
-async function handleReject(row) {
-	console.log('驳回row的值：', row)
+//机构审核
+const identityIns = async (id, state) => {
 	try {
-		const res = await identityInsService(row.id, '2')
-		if (res.data === 200) {
+		try {
+			const res = await identityInsService(id, state)
+			if (res.code === 0) {
+				ElMessage.success('审核成功')
+        institutionInit()
+			} else {
+				ElMessage.error('审核失败')
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	} catch (error) {
+		console.log(error)
+	}
+}
+
+//志愿者审核
+const identityVol = async (id, state) => {
+	try {
+		const res = await identityVolService(id, state)
+		if (res.code === 0) {
 			ElMessage.success('审核成功')
+      studentInit()
 		} else {
-			ElMessage.error('审核成功')
+			ElMessage.error('审核失败')
 		}
 	} catch (error) {
 		console.error(error)
 	}
 }
-async function handleAction(row) {
-	console.log('通过row的值：', row)
+
+//人才审核
+const identityProf = async (id, state) => {
 	try {
-		const res = await identityInsService(row.id, '1')
-		if (res.data === 200) {
+		const res = await identityProService(id, state)
+		if (res.code === 0) {
 			ElMessage.success('审核成功')
+      studentInit()
 		} else {
-			ElMessage.error('审核成功')
+			ElMessage.error('审核失败')
 		}
 	} catch (error) {
-		console.error(error)
+		console.log(error)
+	}
+}
+
+async function handleReject(row) {
+	console.log('驳回row的值：', row)
+	console.log('nini', selectedValue.value)
+	if (selectedValue.value === 'firm') {
+		identityIns(row.id, '2')
+	} else {
+		if (params.value.newType === '1') {
+			identityVol(row.username, '2')
+		} else if (params.value.newType === '2') {
+			identityProf(row.username, '2')
+		}
+	}
+}
+async function handleAction(row) {
+	console.log('通过row的值：', row)
+	if (selectedValue.value === 'firm') {
+		identityIns(row.id, '1')
+	} else {
+		if (params.value.newType === '1') {
+			identityVol(row.username, '1')
+		} else if (params.value.newType === '2') {
+			identityProf(row.username, '1')
+		}
 	}
 }
 </script>
