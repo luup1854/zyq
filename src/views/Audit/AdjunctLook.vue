@@ -100,6 +100,7 @@ const scrollToSection = (sectionId) => {
 
 const approve = () => {
   // 处理通过按钮点击事件
+  console.log('申诉');
 };
 
 

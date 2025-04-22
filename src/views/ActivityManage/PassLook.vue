@@ -40,10 +40,10 @@
       </div>
     </el-card>
 
-    <div class="buttons">
+    <!-- <div class="buttons">
       <el-button type="primary" @click="approve">通过</el-button>
       <el-button @click="reject">驳回</el-button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -90,10 +90,12 @@ const scrollToSection = (sectionId) => {
 
 const approve = () => {
   // 处理通过按钮点击事件
+  console.log('已发布,活动通过');
 };
 
 const reject = () => {
   // 处理驳回按钮点击事件
+  console.log('已发布,活动驳回');
 };
 </script>
 

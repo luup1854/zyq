@@ -12,8 +12,8 @@
 			@select="handleSelect">
 			<el-menu-item index="0">全部活动</el-menu-item>
 			<el-menu-item index="1">待审核</el-menu-item>
-			<el-menu-item index="2">已发布</el-menu-item>
-			<el-menu-item index="3">已驳回</el-menu-item>
+			<el-menu-item index="2">已驳回</el-menu-item>
+			<el-menu-item index="3">已发布</el-menu-item>
 		</el-menu>
 
 		<div v-if="activeIndex === '0'">

@@ -105,3 +105,23 @@ export function ApproveStu(username: string) {
 export function getStuByUsername(url?: string) {
   return get<any, Result<student>>(baseUrlApi(`administration/stu/${url}`))
 }
+
+
+//活动审核
+export const  campusReviewService =(id,audit,reject)=>{
+  return put(baseUrlApi(`administration/audit/campus?id=${id}&audit=${audit}&reject=${reject}`))
+}
+
+ //身份审核
+ //志愿者
+ export const  identityVolService =(username,volunteer)=>{
+  return put(baseUrlApi(`administration/audit/volunteer?username=${username}&volunteer=${volunteer}`))
+}
+//专业
+export const  identityProService =(username,profess)=>{
+  return put(baseUrlApi(`administration/audit/profess?username=${username}&profess=${profess}`))
+}
+//机构审核
+export const  identityInsService =(id,state)=>{
+  return put(baseUrlApi(`administration/audit/institution?id=${id}&state=${state}`))
+}

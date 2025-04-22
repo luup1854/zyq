@@ -41,13 +41,13 @@
 		</el-card>
 		<el-card class="activity-section" header="驳回原因" id="causeCard">
 			<div class="activity-cause">
-				<p>{{ activity.content }}</p>
+				<p>{{ activity.reject || '--' }}</p>
 			</div>
 		</el-card>
 
-		<div class="buttons">
+		<!-- <div class="buttons">
 			<el-button type="primary" @click="approve">申诉</el-button>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -63,7 +63,7 @@ const activeIndex2 = ref('1')
 const init = async () => {
 	const res = await getActById(activityId)
 	activity.value = res.data
-	// console.log('activity:',activity.value);
+	console.log('activity:', activity.value)
 }
 
 const activity = ref({})
@@ -93,6 +93,7 @@ const scrollToSection = (sectionId) => {
 
 const approve = () => {
 	// 处理通过按钮点击事件
+	console.log('申述')
 }
 </script>
 
