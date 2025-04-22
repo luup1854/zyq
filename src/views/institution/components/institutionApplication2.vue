@@ -131,7 +131,7 @@ const handleSuccess = (res: any) => {
 		name: res.data,
 		url: res.data
 	}
-	console.log('fileList: ', fileList.value)
+	console.log('fileList222: ', fileList.value)
 }
 
 /**
@@ -146,7 +146,7 @@ const deleteFiles = ref<UploadUserFile[]>([])
  * 预览图片
  */
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
-	console.log('fileList: ', fileList.value)
+	console.log('fileList111: ', fileList.value)
 	dialogImageUrl.value = uploadFile.url!
 	dialogVisible.value = true
 }
