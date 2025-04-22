@@ -15,6 +15,7 @@ export function getInstitution(params?: object) {
  * @param params 
  * @returns 
  */
+//获取需要审核的志愿者和专业人员
 export function getVolunteer() {
   return get<any, Result<any>>(baseUrlApi('administration/audit/volunteer'))
 }
@@ -128,4 +129,17 @@ export const  identityProService =(username,profess)=>{
 //机构审核
 export const  identityInsService =(id,state)=>{
   return put(baseUrlApi(`administration/audit/institution?id=${id}&state=${state}`))
+}
+
+//获取普通学生
+export function getStuService() {
+  return get<any, Result<any>>(baseUrlApi('administration/PuTongStudent'))
+}
+//获取志愿者
+export function getVolService() {
+  return get<any, Result<any>>(baseUrlApi('administration/volunteer'))
+}
+//获取专业人才
+export function getProService() {
+  return get<any, Result<any>>(baseUrlApi('administration/profess'))
 }
